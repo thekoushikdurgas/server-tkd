@@ -14,9 +14,13 @@ app.use(cors({ origin: '*', credentials: true, optionSuccessStatus: 200, }));
 app.use(cookieParser());
 app.use(express.json())
 app.get('/', function (req, res){res.render('index.html');});
+app.get('/todo', function (req, res){res.render('todo/index.html');});
 app.use('/api/auth', require('./routes/auth'))
 app.use('/api', require('./routes/api'))
 app.use('/poll/api', require('./routes/poll'))
+app.use('/task/api', require('./routes/task'))
+app.use('/unitconverter/api', require('./routes/unitconverter'))
+app.use('/payment/api', require('./routes/payment'))
 const http = require("http");
 // var http=require('http');
 // var url=require('url');
@@ -34,7 +38,7 @@ const server = http.createServer(app);
 //     }
 
 // });
-server.listen(process.env.PORT || 8000, () => { console.log(`listening at http://localhost:${process.env.PORT || 8000}`) });
+server.listen(process.env.PORT || 7000, () => { console.log(`listening at http://localhost:${process.env.PORT || 7000}`) });
 // const host = "http://localhost:3000";
 const host = "http://chat.thekoushikdurgas.in";
 const io = new Server(server, { cors: { origin: host, methods: ["GET", "POST"], }, });
@@ -74,4 +78,4 @@ io.on("connection", (socket) => {
         socket.to(data.room).emit("receive_message", data);
     });
 });
-// app.listen(process.env.PORT || 8000, () => { console.log(`listening at http://localhost:${process.env.PORT || 8000}`) })
+// app.listen(process.env.PORT || 7000, () => { console.log(`listening at http://localhost:${process.env.PORT || 7000}`) })

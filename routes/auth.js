@@ -28,12 +28,14 @@ router.post('/createuser', [
   if (!errors.isEmpty()) { return res.json({ success: false, errors: errors.array() }); }
   try {
     const { name, email, password, username, phone, country, dof, picimg, gender } = req.body;
-    var user = await User.findOne({ email: email });
-    if (user) { return res.json({ success: false, errors: "Sorry a user with this email already exists" }) }
+    // var user = await User.findOne({ email: email });
+    // if (user) { return res.json({ success: false, errors: "Sorry a user with this email already exists" }) }
     const salt = await bcrypt.genSalt(10);
     const secPass = await bcrypt.hash(password, salt);
-    user = await User.create({ name: name, password: secPass, email: email, username: username, phone: phone, country: country, contacts: [], blockcontacts: [], rooms: [], blockrooms: [], status: 'offline', dof: dof, picimg: picimg, gender: gender, });
-    const data = { id: user.id }
+    // var user = await User.create({});
+    // var user = await User.create({ name: name, password: secPass, email: email, username: username, phone: phone, country: country, contacts: [], blockcontacts: [], rooms: [], blockrooms: [], status: 'offline', dof: dof, picimg: picimg, gender: gender, });
+    console.log(await User.create({ name: name, password: secPass, email: email, username: username, phone: phone, country: country, contacts: [], blockcontacts: [], rooms: [], blockrooms: [], status: 'offline', dof: dof, picimg: picimg, gender: gender, }));
+    const data = { id: user.id };
     const authtoken = jwt.sign(data, JWT_SECRET);
     res.json({ success: true, authtoken, email });
   } catch (error) { console.error(error.message); res.json({ success: false, errors: error.message }); }
