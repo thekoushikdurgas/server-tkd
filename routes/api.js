@@ -40,9 +40,9 @@ router.get('/social', async (req, res) => {
     console.log('social');
 });
 router.get('/detail', async (req, res) => {
+    console.log('detail');
     try { const temp = await detail.find(); res.json(temp); }
     catch (error) { console.error(error.message); res.json({ success: false, errors: error.message }); }
-    console.log('detail');
 });
 router.get('/education', async (req, res) => {
     try { const temp = await education.find(); res.json(temp); }
