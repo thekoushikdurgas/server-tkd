@@ -13,14 +13,16 @@ app.set('view engine', 'ejs');
 app.use(cors({ origin: '*', credentials: true, optionSuccessStatus: 200, }));
 app.use(cookieParser());
 app.use(express.json())
-app.get('/', function (req, res){res.render('index.html');});
-app.get('/todo', function (req, res){res.render('todo/index.html');});
+app.get('/', function (req, res) { res.render('index.html'); });
+app.get('/edit/table/', function (req, res) { res.render('table-index.html'); });
+app.get('/todo', function (req, res) { res.render('todo/index.html'); });
 app.use('/api/auth', require('./routes/auth'))
 app.use('/api', require('./routes/api'))
 app.use('/poll/api', require('./routes/poll'))
 app.use('/task/api', require('./routes/task'))
 app.use('/unitconverter/api', require('./routes/unitconverter'))
 app.use('/payment/api', require('./routes/payment'))
+app.use('/api/exact', require('./routes/exact'))
 const http = require("http");
 // var http=require('http');
 // var url=require('url');
